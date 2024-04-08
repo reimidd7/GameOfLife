@@ -7,6 +7,9 @@ ASSET_MANAGER.downloadAll(() => {
 	const ctx = canvas.getContext("2d");
 
 	gameEngine.init(ctx);
+	gameEngine.addEntity(new Automata(gameEngine, 100, 100))
+	
 
 	gameEngine.start();
 });
+

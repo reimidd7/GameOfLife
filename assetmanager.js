@@ -1,3 +1,4 @@
+
 class AssetManager {
     constructor() {
         this.successCount = 0;
@@ -17,22 +18,23 @@ class AssetManager {
 
     downloadAll(callback) {
         if (this.downloadQueue.length === 0) setTimeout(callback, 10);
-        for (let i = 0; i < this.downloadQueue.length; i++) {
-            const img = new Image();
+        for (var i = 0; i < this.downloadQueue.length; i++) {
+            var img = new Image();
+            var that = this;
 
-            const path = this.downloadQueue[i];
+            var path = this.downloadQueue[i];
             console.log(path);
 
-            img.addEventListener("load", () => {
-                console.log("Loaded " + img.src);
-                this.successCount++;
-                if (this.isDone()) callback();
+            img.addEventListener("load", function () {
+                console.log("Loaded " + this.src);
+                that.successCount++;
+                if (that.isDone()) callback();
             });
 
-            img.addEventListener("error", () => {
-                console.log("Error loading " + img.src);
-                this.errorCount++;
-                if (this.isDone()) callback();
+            img.addEventListener("error", function () {
+                console.log("Error loading " + this.src);
+                that.errorCount++;
+                if (that.isDone()) callback();
             });
 
             img.src = path;
